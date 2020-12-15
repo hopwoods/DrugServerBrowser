@@ -1,0 +1,44 @@
+﻿@page
+@using FirstDataBank.DrugServer.API
+@model DrugServer_Browser.Pages.Products.GetProductsModel
+@{
+    ViewData["Title"] = "GetProduct";
+}
+
+<h1>Get Products</h1>
+
+<div class="row">
+    <form class="form" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Enter Search Term Here" asp-for="SearchTerm"/>
+            <label class="" asp-for="SearchTerm"></label>
+        </div>
+        <div class="form-group">
+            <select asp-for="Region" asp-items="Html.GetEnumSelectList<Region>()">
+                <option value="0">Choose a region</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button asp-page="GetProduct" type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>
+
+@{
+    if (Model.ProductsList != null && Model.ProductsList.Count > 0)
+    {
+        <div class="row">
+            <table class="table table-primary table-responsive">
+                @foreach (var product in Model.ProductsList)
+                {
+                    <tr>
+                        <td>Id</td>
+                        <td>@product.SingleId</td>
+                        <td>@product.PrimaryPreferredName</td>
+                        <td>@product.MarketStatus</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+}

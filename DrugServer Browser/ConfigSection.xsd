@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ConfigSection"
+    targetNamespace="http://www.firstdatabank.co.uk/DrugServer/ConfigSection.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://www.firstdatabank.co.uk/DrugServer/ConfigSection.xsd"
+    xmlns:mstns="http://www.firstdatabank.co.uk/DrugServer/ConfigSection.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="FirstDataBankEurope">
+    <xs:complexType id="FirstDataBankEurope">
+      <xs:sequence>
+        <xs:element name="Localisation" type="Localisation" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="Proxies" type="Proxies" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="Database" type="Database" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="Dose" type="Dose" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="WCF" type="WCF" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="Localisation">
+    <xs:attribute name="defaultRegion" type="Region" use="required"/>
+    <xs:attribute name="defaultLanguage" type="Language" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Proxies">
+    <xs:sequence minOccurs="1" maxOccurs="5">
+      <xs:element name="Proxy" type="Proxy" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Proxy">
+    <xs:attribute name="name" type="ProxyName" use="required"/>
+    <xs:attribute name="assembly" type="AssemblyNames" use="required"/>
+    <xs:attribute name="type" type="ProxyType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Database">
+    <xs:attribute name="connectionName" default="Connection1"/>
+    <xs:attribute name="maxRetryCount" default="3" type="SmallNumber"/>
+    <xs:attribute name="retrySleepInMilliseconds" default="100" type="Series50"/>
+  </xs:complexType>
+
+  <xs:complexType name="Dose">
+    <xs:sequence minOccurs="1" maxOccurs="1">
+      <xs:element name="DisplayFormat">
+        <xs:complexType>
+          <xs:attribute name="dateAndTime" default="ddd dd-MMM-yyyy HH:mm" type="xs:string"/>
+          <xs:attribute name="dateOnly" default="ddd dd-MMM-yyyy" type="xs:string"/>
+          <xs:attribute name="timeOnly" default="HH:mm" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="WCF">
+    <xs:attribute name="endPointName" default="DrugServiceEndpoint" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:simpleType name="Region">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="England"/>
+      <xs:enumeration value="Wales"/>
+      <xs:enumeration value="Scotland"/>
+      <xs:enumeration value="NorthernIreland"/>
+      <xs:enumeration value="RepublicOfIreland"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Language">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="English"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProxyName">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Proxy"/>
+      <xs:enumeration value="Proxy_UK"/>
+      <xs:enumeration value="Proxy_Scotland"/>
+      <xs:enumeration value="Proxy_Ireland"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AssemblyNames">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FirstDataBank.DrugServer.WCFProxy, Culture=neutral, PublicKeyToken=9d183bfa74667b57"/>
+      <xs:enumeration value="FirstDataBank.DrugServer.VirtualProxy, Culture=neutral, PublicKeyToken=9d183bfa74667b57"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ProxyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FirstDataBank.DrugServer.Client.VirtualProxy"/>
+      <xs:enumeration value="FirstDataBank.DrugServer.Client.VirtualProxyUK"/>
+      <xs:enumeration value="FirstDataBank.DrugServer.Client.VirtualProxyScotland"/>
+      <xs:enumeration value="FirstDataBank.DrugServer.Client.VirtualProxyIreland"/>
+      <xs:enumeration value="FirstDataBank.DrugServer.Client.WCFProxy"/>
+      <xs:enumeration value="FirstDataBank.DrugServer.Client.WCFProxyIreland"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SmallNumber">
+    <xs:restriction base="xs:integer">
+      <xs:enumeration value="1"/>
+      <xs:enumeration value="2"/>
+      <xs:enumeration value="3"/>
+      <xs:enumeration value="4"/>
+      <xs:enumeration value="5"/>
+      <xs:enumeration value="6"/>
+      <xs:enumeration value="7"/>
+      <xs:enumeration value="8"/>
+      <xs:enumeration value="9"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Series50">
+    <xs:restriction base="xs:integer">
+      <xs:enumeration value="50"/>
+      <xs:enumeration value="100"/>
+      <xs:enumeration value="150"/>
+      <xs:enumeration value="200"/>
+      <xs:enumeration value="250"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row">
+    <div class="col-12">
+        <a asp-page="Products/GetProducts">Get Products</a>
+    </div>
+</div>
+@*<div class="row">
+    <div class="col-12">
+        <h1 class="h1">Configuration Properties</h1>
+        <table class="table table-sm table-striped w-100">
+            <tr>
+                <th>Property</th>
+                <th colspan="2">Value</th>
+            </tr>
+            @{
+                foreach (var item in Model.Configuration.GetChildren())
+                {
+                    if (item.Value == null)
+                    {
+                        foreach (var subItem in item.GetChildren())
+                        {
+                            <tr>
+                                <td>@item.Key</td>
+                                <td>@subItem.Key</td>
+                                <td>@subItem.Value</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="2">@item.Key</td>
+                            <td colspan="2">@item.Value</td>
+                        </tr>
+                    }
+                }
+            }
+        </table>
+    </div>
+</div>*@
+
