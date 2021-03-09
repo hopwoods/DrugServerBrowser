@@ -12,7 +12,7 @@ namespace DrugServerConsole
 
         public ProductUtility()
         {
-            _drugSystemFactory = Startup.ServiceProvider.GetRequiredService<IDrugSystemFactory>();
+            _drugSystemFactory = new DrugSystemFactory()
         }
 
         public void ListProductsByName(string searchTerm)
@@ -37,4 +37,5 @@ namespace DrugServerConsole
             }
         }
     }
+
 }
