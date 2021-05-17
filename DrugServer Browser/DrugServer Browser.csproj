@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <Reference Include="FirstDataBank.DrugServer.API">
-      <HintPath>..\DrugServerConsole\bin\Debug\FirstDataBank.DrugServer.API.dll</HintPath>
+      <HintPath>..\..\..\Work\fdb.drugserver.api\DrugServer\src\CSharp Client\API\bin\Release\netstandard2.0\FirstDataBank.DrugServer.API.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -1,25 +1,24 @@
-﻿using FirstDataBank.DrugServer.API;
-using System;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using FirstDataBank.DrugServer.API;
 
-namespace DrugServerConsole
+namespace DrugServerConsole.Utilities
 {
     internal class ProductUtility : IProductUtility
     {
-        private readonly IDrugSystemFactory _drugSystemFactory;
-        private IDrugSystem _drugSystem;
+        private readonly IDrugSystem _drugSystem;
 
-        public ProductUtility()
+        public ProductUtility(IDrugSystem drugSystem)
         {
-            _drugSystemFactory = new DrugSystemFactory()
+            _drugSystem = drugSystem;
+            _drugSystem.Environment.Language = Language.English;
+            _drugSystem.Environment.DrugTerminology = DrugTerminology.MDDF;
+            _drugSystem.Environment.AttributePopulation.All();
         }
 
         public void ListProductsByName(string searchTerm)
         {
-            _drugSystem = _drugSystemFactory.CreateSystem();
-            _drugSystem.Environment.DrugTerminology = DrugTerminology.MDDF;
-            _drugSystem.Environment.AttributePopulation.All();
+            if (string.IsNullOrWhiteSpace(searchTerm)) 
+                return;
 
             var filter = new Filter
             {
